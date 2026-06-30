@@ -34,9 +34,7 @@ def test_backtest_model_pools_folds(daily_series: pd.DataFrame) -> None:
 
 
 def test_compare_models_sorted_by_wape(daily_series: pd.DataFrame) -> None:
-    table = backtest.compare_models(
-        daily_series, ["seasonal_naive", "gbm"], horizon=14, folds=2
-    )
+    table = backtest.compare_models(daily_series, ["seasonal_naive", "gbm"], horizon=14, folds=2)
     assert list(table["model"])  # non-empty
     assert table["wape"].is_monotonic_increasing
 

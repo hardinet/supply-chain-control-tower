@@ -17,7 +17,7 @@ from __future__ import annotations
 
 import math
 from dataclasses import dataclass
-from enum import Enum
+from enum import StrEnum
 from statistics import NormalDist
 
 
@@ -100,7 +100,7 @@ def days_of_cover(on_hand: float, avg_daily_demand: float) -> float:
     return float(on_hand / avg_daily_demand)
 
 
-class StockStatus(str, Enum):
+class StockStatus(StrEnum):
     """Operational status of a stock position relative to its policy."""
 
     STOCKOUT = "stockout"
