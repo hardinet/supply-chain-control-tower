@@ -35,9 +35,19 @@
 
 ## Demo
 
-Demonstration en ligne : _lien a venir (Render)_.
+Demonstration en ligne : deployable en un clic via le blueprint Render
+(`render.yaml`). _Lien a ajouter apres deploiement._
 
-<!-- Le GIF de demonstration sera ajoute ici : docs/assets/demo.gif -->
+Apercu - figures generees depuis les vraies donnees, reproductibles via
+`python -m scripts.make_figures` :
+
+<p align="center">
+  <img src="docs/assets/fig_forecast.png" alt="Prevision de demande a 42 jours" width="92%">
+</p>
+<p align="center">
+  <img src="docs/assets/fig_backtest.png" alt="Comparaison des modeles" width="49%">
+  <img src="docs/assets/fig_inventory.png" alt="Position de stock vs point de commande" width="49%">
+</p>
 
 ## Contexte et probleme
 
@@ -151,15 +161,26 @@ make format    # black + ruff --fix
 
 ## Resultats
 
-> Chiffres issus du backtesting *rolling-origin* sur les donnees Rossmann.
-> _Tableau mis a jour automatiquement apres `make data && python -m sctower.cli backtest`._
+Backtesting *rolling-origin* (4 fenetres de 42 jours, strictement hors-echantillon)
+sur la demande agregee Rossmann : **1 017 209 lignes, 1115 boutiques, 2013-2015**.
+WAPE (volume-pondere) est la metrique phare car la MAPE est artificiellement
+gonflee par les dimanches de fermeture (demande proche de zero).
 
-| Modele          | WAPE | MAPE | MAE | Biais |
-|-----------------|------|------|-----|-------|
-| seasonal_naive  | _–_  | _–_  | _–_ | _–_   |
-| sarima          | _–_  | _–_  | _–_ | _–_   |
-| gbm (LightGBM)  | _–_  | _–_  | _–_ | _–_   |
-| prophet         | _–_  | _–_  | _–_ | _–_   |
+| Modele             | WAPE       | MAPE    | MAE    | Biais % |
+|--------------------|------------|---------|--------|---------|
+| **gbm (LightGBM)** | **15.0 %** | 88.0 %  | 0.99 M | -4.6 %  |
+| prophet            | 21.2 %     | 103.4 % | 1.39 M | -7.9 %  |
+| sarima             | 21.2 %     | 119.0 % | 1.40 M | +2.6 %  |
+| seasonal_naive     | 22.4 %     | 101.0 % | 1.47 M | +1.0 %  |
+
+Le gradient boosting (features calendaires + lags + moyennes glissantes, prevision
+recursive) reduit le **WAPE de 33 %** par rapport a la baseline saisonniere
+(15.0 % vs 22.4 %) et devance SARIMA et Prophet. Entierement reproductible :
+`make data && python -m sctower.cli backtest`.
+
+<p align="center">
+  <img src="docs/assets/fig_demand.png" alt="Demande agregee Rossmann" width="92%">
+</p>
 
 ## Structure du projet
 
