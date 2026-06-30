@@ -7,7 +7,7 @@ name = "sctower"
 version = "0.1.0"
 description = "Supply Chain Control Tower - demand forecasting, inventory optimization and stockout/overstock alerting on real retail data."
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.12"
 license = { text = "MIT" }
 authors = [{ name = "Ardin Etienne KIMBATSA" }]
 keywords = ["supply-chain", "demand-forecasting", "inventory-optimization", "time-series", "dash"]
@@ -63,11 +63,11 @@ packages = ["src/sctower"]
 # ---------------------------------------------------------------------------
 [tool.black]
 line-length = 100
-target-version = ["py311", "py312"]
+target-version = ["py312"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py311"
+target-version = "py312"
 src = ["src", "tests"]
 
 [tool.ruff.lint]
@@ -90,7 +90,7 @@ ignore = [
 "tests/*" = ["S101"]
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.12"
 strict = true
 warn_unused_ignores = true
 warn_redundant_casts = true
