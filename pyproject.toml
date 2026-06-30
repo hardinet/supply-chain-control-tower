@@ -96,12 +96,15 @@ warn_unused_ignores = true
 warn_redundant_casts = true
 disallow_untyped_defs = true
 plugins = ["pydantic.mypy"]
-# Third-party libs without complete type information.
+# Third-party libs without complete (or with inconsistent) type information.
+# follow_imports=skip treats them as untyped (Any), which is the pragmatic choice
+# for Dash's dynamic API and the scientific stack.
 [[tool.mypy.overrides]]
 module = [
     "lightgbm.*",
     "statsmodels.*",
     "prophet.*",
+    "dash",
     "dash.*",
     "dash_bootstrap_components.*",
     "plotly.*",
@@ -109,6 +112,12 @@ module = [
     "holidays.*",
 ]
 ignore_missing_imports = true
+follow_imports = "skip"
+
+# The presentation layer uses Dash's dynamic @callback decorator (untyped).
+[[tool.mypy.overrides]]
+module = ["sctower.app.*"]
+disallow_untyped_decorators = false
 
 [tool.pytest.ini_options]
 minversion = "8.0"

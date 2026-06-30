@@ -1,0 +1,288 @@
+/* Supply Chain Control Tower - design system (Teal #0F766E / Amber #F59E0B) */
+
+:root {
+  --teal: #0f766e;
+  --teal-dark: #0b5a53;
+  --teal-soft: #ccfbf1;
+  --amber: #f59e0b;
+  --amber-soft: #fef3c7;
+  --ink: #0f172a;
+  --slate: #475569;
+  --muted: #94a3b8;
+  --mist: #f8fafc;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --shadow: 0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px rgba(15, 23, 42, 0.06);
+  --radius: 14px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--mist);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+.app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* --- Navbar --- */
+.app-navbar {
+  box-shadow: var(--shadow);
+}
+
+.brand-link {
+  text-decoration: none;
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.brand-strong {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.2px;
+}
+
+.brand-light {
+  color: var(--amber);
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.nav-link-custom {
+  color: rgba(255, 255, 255, 0.82) !important;
+  font-weight: 500;
+  font-size: 0.92rem;
+  padding: 0.4rem 0.85rem !important;
+  border-radius: 8px;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.nav-link-custom:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff !important;
+}
+
+.nav-link-custom.active {
+  color: #ffffff !important;
+  background: var(--teal);
+}
+
+.data-badge {
+  margin-left: 1rem;
+  padding: 0.32rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.data-badge.ok {
+  background: var(--teal-soft);
+  color: var(--teal-dark);
+}
+
+.data-badge.warn {
+  background: var(--amber-soft);
+  color: #92400e;
+}
+
+/* --- Layout --- */
+.app-main {
+  flex: 1;
+  padding: 1.6rem 0 2.4rem;
+}
+
+.page {
+  animation: fade-in 0.4s ease both;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.section-head {
+  margin: 1.4rem 0 0.4rem;
+}
+
+.section-title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.section-subtitle {
+  color: var(--slate);
+  font-size: 0.92rem;
+  margin-top: 0.15rem;
+}
+
+/* --- Cards / panels --- */
+.card-panel {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.1rem 1.2rem;
+  margin-bottom: 1.1rem;
+}
+
+.chart-row > div {
+  margin-bottom: 1.1rem;
+}
+
+/* --- KPI cards --- */
+.kpi-row {
+  margin-top: 0.6rem;
+}
+
+.kpi-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.05rem 1.15rem;
+  height: 100%;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 14px rgba(15, 23, 42, 0.08), 0 16px 40px rgba(15, 23, 42, 0.08);
+}
+
+.kpi-label {
+  font-size: 0.74rem;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.kpi-value {
+  font-size: 1.85rem;
+  font-weight: 700;
+  color: var(--ink);
+  margin-top: 0.25rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.kpi-sub {
+  font-size: 0.8rem;
+  color: var(--slate);
+  margin-top: 0.1rem;
+}
+
+/* --- Controls --- */
+.control-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  align-items: flex-end;
+}
+
+.control-group {
+  min-width: 220px;
+}
+
+.control-grow {
+  flex: 1;
+  min-width: 280px;
+}
+
+.control-label {
+  display: block;
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--slate);
+  margin-bottom: 0.4rem;
+}
+
+/* --- Banners / notes --- */
+.note-banner {
+  background: var(--amber-soft);
+  border-left: 3px solid var(--amber);
+  color: #92400e;
+  padding: 0.65rem 0.9rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.status-badge {
+  color: #ffffff;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+/* --- Empty state --- */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+}
+
+.code-block {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--teal-soft);
+  padding: 0.5rem 0.9rem;
+  border-radius: 8px;
+  font-family: "JetBrains Mono", Consolas, monospace;
+  margin: 0.5rem 0;
+}
+
+/* --- Footer --- */
+.app-footer {
+  border-top: 1px solid var(--border);
+  background: var(--card);
+}
+
+.footer-inner {
+  color: var(--muted);
+  font-size: 0.8rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+/* --- Accessibility: visible focus --- */
+a:focus-visible,
+button:focus-visible,
+.nav-link-custom:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .data-badge {
+    display: none;
+  }
+  .kpi-value {
+    font-size: 1.5rem;
+  }
+}
