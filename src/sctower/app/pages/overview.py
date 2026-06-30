@@ -16,8 +16,6 @@ from sctower.app.theme import (
     section_title,
 )
 
-dash.register_page(__name__, path="/", name="Vue d'ensemble", title="Vue d'ensemble")
-
 
 def _demand_trend_figure() -> go.Figure:
     series = appdata.get_total_series()
@@ -135,3 +133,6 @@ def layout() -> html.Div:
         ],
         className="page",
     )
+
+
+dash.register_page(__name__, path="/", name="Vue d'ensemble", title="Vue d'ensemble", layout=layout)

@@ -19,8 +19,6 @@ from sctower.app.theme import (
     section_title,
 )
 
-dash.register_page(__name__, path="/inventory", name="Stocks", title="Stocks")
-
 _STATUS_ORDER = ["stockout", "at_risk", "healthy", "overstock"]
 _TABLE_COLUMNS = [
     ("store", "Boutique"),
@@ -181,3 +179,6 @@ def _filter_table(status: str) -> list[dict[Hashable, Any]]:
     )
     cols = [cid for cid, _ in _TABLE_COLUMNS]
     return alerts[cols].to_dict("records")
+
+
+dash.register_page(__name__, path="/inventory", name="Stocks", title="Stocks", layout=layout)

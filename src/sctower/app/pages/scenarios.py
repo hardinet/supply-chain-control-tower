@@ -12,8 +12,6 @@ from sctower.config import get_settings
 from sctower.domain.forecasting import available_models
 from sctower.services.scenarios import Scenario, apply_scenario, projected_demand
 
-dash.register_page(__name__, path="/scenarios", name="Simulation", title="Simulation")
-
 _HORIZON = 42
 
 
@@ -191,3 +189,8 @@ def _simulate(
     )
     fig.update_layout(height=380, title="Prevision: base vs scenario")
     return kpis, fig
+
+
+dash.register_page(
+    __name__, path="/scenarios", name="Simulation", title="Simulation", layout=layout
+)

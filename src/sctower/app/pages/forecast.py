@@ -12,8 +12,6 @@ from sctower.app.theme import PALETTE, no_data_message, section_title
 from sctower.domain.forecasting import available_models
 from sctower.services.pipeline import fit_and_forecast
 
-dash.register_page(__name__, path="/forecast", name="Prevision", title="Prevision")
-
 _HISTORY_TAIL = 180
 
 
@@ -185,3 +183,6 @@ def layout() -> html.Div:
 def _update_forecast(store_value: str, model_name: str, horizon: int) -> go.Figure:
     series = _series_for(store_value)
     return _forecast_figure(series, model_name, int(horizon))
+
+
+dash.register_page(__name__, path="/forecast", name="Prevision", title="Prevision", layout=layout)
