@@ -13,6 +13,10 @@ services:
         value: production
       - key: SCTOWER_LOG_JSON
         value: "true"
+      # New-style single Kaggle token (KGAT_...). Set this in the Render dashboard.
+      - key: KAGGLE_API_TOKEN
+        sync: false
+      # Legacy alternative (set both instead of KAGGLE_API_TOKEN if you prefer).
       - key: KAGGLE_USERNAME
         sync: false
       - key: KAGGLE_KEY

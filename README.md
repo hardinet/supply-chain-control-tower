@@ -147,8 +147,9 @@ make data                                         # telecharge et prepare les do
 make run                                          # lance l'app Dash
 ```
 
-> Telechargement des donnees : place un token Kaggle dans `~/.kaggle/kaggle.json`
-> (Kaggle > Account > Create New API Token), puis `make data`.
+> Telechargement des donnees : exporte `KAGGLE_API_TOKEN` (nouveau token `KGAT_...`)
+> ou place `~/.kaggle/kaggle.json` (Kaggle > Settings > Create New API Token), puis
+> `make data`. Accepte d'abord les regles de la competition sur la page Kaggle.
 
 ### Commandes utiles
 

@@ -11,6 +11,7 @@ services:
       SCTOWER_DATA_RAW_DIR: /app/data/raw
       SCTOWER_DATA_CURATED_DIR: /app/data/curated
       # Optional: set in a local .env to let the container fetch the dataset.
+      KAGGLE_API_TOKEN: ${KAGGLE_API_TOKEN:-}
       KAGGLE_USERNAME: ${KAGGLE_USERNAME:-}
       KAGGLE_KEY: ${KAGGLE_KEY:-}
     volumes:

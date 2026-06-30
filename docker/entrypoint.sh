@@ -6,7 +6,7 @@ set -e
 CURATED="${SCTOWER_DATA_CURATED_DIR:-/app/data/curated}/sales.parquet"
 
 if [ ! -f "$CURATED" ]; then
-  if [ -n "$KAGGLE_USERNAME" ] && [ -n "$KAGGLE_KEY" ]; then
+  if [ -n "$KAGGLE_API_TOKEN" ] || { [ -n "$KAGGLE_USERNAME" ] && [ -n "$KAGGLE_KEY" ]; }; then
     echo "[entrypoint] curated dataset missing - downloading from Kaggle..."
     if python -m scripts.download_data && python -m sctower.cli curate; then
       echo "[entrypoint] dataset ready."
