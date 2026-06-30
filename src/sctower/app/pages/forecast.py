@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import dash
+import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 from dash import Input, Output, callback, dash_table, dcc, html
@@ -43,8 +44,8 @@ def _forecast_figure(series: pd.DataFrame, model_name: str, horizon: int) -> go.
     if result.yhat_upper is not None and result.yhat_lower is not None:
         fig.add_trace(
             go.Scatter(
-                x=list(result.ds) + list(result.ds[::-1]),
-                y=list(result.yhat_upper) + list(result.yhat_lower[::-1]),
+                x=result.ds.append(result.ds[::-1]),
+                y=np.concatenate([result.yhat_upper, result.yhat_lower[::-1]]),
                 fill="toself",
                 fillcolor="rgba(15,118,110,0.15)",
                 line={"color": "rgba(0,0,0,0)"},
