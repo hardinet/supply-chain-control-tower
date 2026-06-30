@@ -1,0 +1,38 @@
+services:
+  app:
+    build: .
+    image: sctower:local
+    ports:
+      - "8050:8050"
+    environment:
+      SCTOWER_ENV: production
+      SCTOWER_LOG_JSON: "true"
+      SCTOWER_DB_URL: postgresql+psycopg://sctower:sctower@postgres:5432/sctower
+      SCTOWER_DATA_RAW_DIR: /app/data/raw
+      SCTOWER_DATA_CURATED_DIR: /app/data/curated
+      # Optional: set in a local .env to let the container fetch the dataset.
+      KAGGLE_USERNAME: ${KAGGLE_USERNAME:-}
+      KAGGLE_KEY: ${KAGGLE_KEY:-}
+    volumes:
+      - ./data:/app/data
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: sctower
+      POSTGRES_PASSWORD: sctower
+      POSTGRES_DB: sctower
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U sctower"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:

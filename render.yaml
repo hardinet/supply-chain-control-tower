@@ -1,0 +1,19 @@
+# Render.com blueprint: a single Dockerized web service.
+# The container fetches and curates the dataset on first boot when the Kaggle
+# credentials below are configured in the Render dashboard.
+services:
+  - type: web
+    name: supply-chain-control-tower
+    runtime: docker
+    plan: free
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: SCTOWER_ENV
+        value: production
+      - key: SCTOWER_LOG_JSON
+        value: "true"
+      - key: KAGGLE_USERNAME
+        sync: false
+      - key: KAGGLE_KEY
+        sync: false
